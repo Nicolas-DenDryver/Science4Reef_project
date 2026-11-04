@@ -1,9 +1,6 @@
 # ============================================================================
 # EXÉCUTION, VISUALISATION ET SAUVEGARDE DES SCÉNARIOS 
 # ============================================================================
-
-setwd("/mnt/fast2To/pourNicolasDD")
-
 library(parallel)
 library(ggplot2)
 library(dplyr)
@@ -16,10 +13,6 @@ Sys.setenv(OMP_NUM_THREADS = 1)
 Sys.setenv(OPENBLAS_NUM_THREADS = 1)
 Sys.setenv(MKL_NUM_THREADS = 1)
 Sys.setenv(BLAS_NUM_THREADS = 1)
-
-print("Lancement des codes sources 1 et 2")
-source("Code/1_Fonctions_modele.R")
-source("Code/2_Param_Scenarios.R")
 
 # Paramètres globaux pour l'extraction
 noms_frequences <- c("No disturbance", 
@@ -182,7 +175,7 @@ for (scenar in 1:length(scenarios)) {
   tous_les_resultats[[scenar]] <- bind_rows(df_classique, df_prog)
 }
 
-# Grand tableau fusionnant tous les scénarios (AVEC CORRECTION DES EXTRACTIONS)
+# Grand tableau fusionnant tous les scénarios
 df_global <- bind_rows(tous_les_resultats) %>%
   mutate(
     Frequence = factor(Frequence, levels = toutes_frequences),

@@ -26,5 +26,5 @@ Le projet est organisé de la manière suivante :
 │   └── 4_graphiques.R              # Génération des graphiques (adaptés aux daltoniens) et modèles mixtes (lmer)
 ├── Resultats_Globaux/              # Dossier de stockage des tableaux de données globaux
 ├── Resultats_Par_Frequence/        # Sorties graphiques et statistiques par régime de perturbation
-├── Licence ...
+├── Licence                         # GNU Affero General Public License v3.0
 └── README.md

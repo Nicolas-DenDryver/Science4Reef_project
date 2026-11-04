@@ -1,0 +1,18 @@
+# ============================================================================
+# SCRIPT MAÎTRE - Lancement du pipeline complet du modèle IPM Coraux
+# ============================================================================
+
+# 1. Chargement des fonctions de base
+source("src/1_Fonctions_modele.R")
+
+# 2. Chargement des paramètres et des scénarios
+source("src/2_Param_Scenarios.R") 
+# (ou source("src/2_Param_Scenarios_bis.R") selon votre besoin)
+
+# 3. Exécution des simulations (x100)
+source("src/3_Simulations_x100.R")
+
+# 4. Génération des graphiques de sortie
+source("src/4_graphiques.R")
+
+cat("Pipeline exécuté avec succès !\n")

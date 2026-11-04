@@ -1,9 +1,7 @@
 ## ============================================================================
 ## GRAPHIQUES DESCRIPTIFS (1-5) + MODÈLES MIXTES & TENDANCES
+## (Version accessible aux daltoniens)
 ## ============================================================================
-
-setwd("C:/Users/nicol/Desktop/Césure/Polynésie/Simulations")
-
 library(ggplot2)
 library(dplyr)
 library(tidyr)
@@ -12,14 +10,11 @@ library(stringr)
 library(lmerTest)   # Pour obtenir les p-values des modèles mixtes
 library(emmeans)    # Pour les tendances (emtrends) et l'état final (emmeans)
 library(performance)# Pour le calcul du R2
+library(viridis)    # Palette de couleurs universelle et adaptée aux daltoniens
 
 # 1. Charger directement le grand tableau global
 print("Chargement du grand tableau global...")
-df_global <- read.csv("Resultats_Globaux/Tableau_Global_Tous_Scenarios_bis.csv")
-
-# 2. Charger les paramètres de base nécessaires pour les noms de fréquences
-source("1_Fonctions_modele.R")
-source("2_Param_Scenarios.R")
+df_global <- read.csv("Resultats_Globaux/Tableau_Global_Tous_Scenarios.csv")
 
 noms_frequences <- c("No disturbance", 
                      "Once every 10 years", 
@@ -117,7 +112,7 @@ for (freq in toutes_frequences) {
     ggsave(filename = file.path(dossier_freq, paste0("Figure_1B_Surface_Connectivity_", conn, ".png")),
            plot = fig1B, width = 14, height = 12, dpi = 300, bg = "white")
     
-    # Figure 2 (Genres par Grille 5x4)
+    # Figure 2 (Genres par Grille 5x4) - Utilisation de Viridis (daltonien-friendly)
     df_summary_genre_grid <- df_conn_sub %>%
       pivot_longer(cols = c(acropora, porites, pocillopora), names_to = "Genre", values_to = "Surface_pct") %>%
       group_by(Scenario, Groupe_Num, Sous_Type, Annee, Genre) %>%
@@ -133,8 +128,8 @@ for (freq in toutes_frequences) {
       geom_ribbon(aes(ymin = Surface_q05, ymax = Surface_q95, fill = Genre), alpha = 0.3) +
       geom_line(aes(y = Surface_mean, color = Genre), linewidth = 1) +
       facet_grid(Genre ~ Groupe_Num + Sous_Type) +
-      scale_fill_brewer(palette = "Set2") +
-      scale_color_brewer(palette = "Set2") +
+      scale_fill_viridis_d(option = "viridis") +
+      scale_color_viridis_d(option = "viridis") +
       scale_y_continuous(limits = c(0, 100), labels = function(x) paste0(x, "%")) +
       labs(title = paste("Figure 2: Coral Genus Dynamics - Connectivity", toupper(conn)),
            subtitle = paste("Disturbance regime:", freq, "| Genus x Scenarios (1-5 x a-d)"),
@@ -145,7 +140,7 @@ for (freq in toutes_frequences) {
     ggsave(filename = file.path(dossier_freq, paste0("Figure_2_Genres_Connectivity_", conn, ".png")),
            plot = fig2, width = 18, height = 10, dpi = 300, bg = "white")
     
-    # Figures 3, 4 et 5
+    # Figures 3, 4 et 5 (Ajout de linetype + Dark2 pour accessibilité daltoniens)
     df_summary_conn <- df_conn_sub %>%
       group_by(Scenario, Annee) %>%
       summarise(
@@ -159,43 +154,48 @@ for (freq in toutes_frequences) {
         .groups = "drop"
       )
     
-    fig3_conn <- ggplot(df_summary_conn, aes(x = Annee, y = SD_Surface, color = Scenario)) +
+    fig3_conn <- ggplot(df_summary_conn, aes(x = Annee, y = SD_Surface, color = Scenario, linetype = Scenario)) +
       geom_line(linewidth = 1.2) +
+      scale_color_brewer(palette = "Dark2") +
       labs(title = paste("Figure 3: Surface Dispersion - Connectivity", toupper(conn)),
         subtitle = freq, x = "Years", y = "Standard Deviation of Surface (%)", 
-        color = "Scenario:") +
+        color = "Scenario:", linetype = "Scenario:") +
       my_theme
     
     ggsave(filename = file.path(dossier_freq, paste0("Figure_3_SD_Surface_Connectivity_", conn, ".png")),
            plot = fig3_conn, width = 10, height = 6, dpi = 300, bg = "white")
     
-    fig4A_conn <- ggplot(df_summary_conn, aes(x = Annee, y = Abondance_mean, color = Scenario)) +
+    fig4A_conn <- ggplot(df_summary_conn, aes(x = Annee, y = Abondance_mean, color = Scenario, linetype = Scenario)) +
       geom_line(linewidth = 1.2) +
+      scale_color_brewer(palette = "Dark2") +
       labs(title = paste("Figure 4A: Mean Abundance - Connectivity", toupper(conn)), 
-           subtitle = freq, x = "Years", y = "Individuals", color = "Scenario:") +
+           subtitle = freq, x = "Years", y = "Individuals", color = "Scenario:", linetype = "Scenario:") +
       my_theme
     
-    fig4B_conn <- ggplot(df_summary_conn, aes(x = Annee, y = Surface_mean, color = Scenario)) +
+    fig4B_conn <- ggplot(df_summary_conn, aes(x = Annee, y = Surface_mean, color = Scenario, linetype = Scenario)) +
       geom_line(linewidth = 1.2) +
+      scale_color_brewer(palette = "Dark2") +
       scale_y_continuous(limits = c(0, 100), labels = function(x) paste0(x, "%")) +
       labs(title = paste("Figure 4B: Mean Surface Area - Connectivity", toupper(conn)), 
-           subtitle = freq, x = "Years", y = "Surface (%)", color = "Scenario:") +
+           subtitle = freq, x = "Years", y = "Surface (%)", color = "Scenario:", linetype = "Scenario:") +
       my_theme
     
     ggsave(filename = file.path(dossier_freq, paste0("Figure_4_Mean_Connectivity_", conn, ".png")),
            plot = fig4A_conn / fig4B_conn, width = 10, height = 12, dpi = 300, bg = "white")
     
-    fig5A_conn <- ggplot(df_summary_conn, aes(x = Annee, y = Abondance_median, color = Scenario)) +
+    fig5A_conn <- ggplot(df_summary_conn, aes(x = Annee, y = Abondance_median, color = Scenario, linetype = Scenario)) +
       geom_line(linewidth = 1.2) +
+      scale_color_brewer(palette = "Dark2") +
       labs(title = paste("Figure 5A: Median Abundance - Connectivity", toupper(conn)), 
-           subtitle = freq, x = "Years", y = "Individuals", color = "Scenario:") +
+           subtitle = freq, x = "Years", y = "Individuals", color = "Scenario:", linetype = "Scenario:") +
       my_theme
     
-    fig5B_conn <- ggplot(df_summary_conn, aes(x = Annee, y = Surface_median, color = Scenario)) +
+    fig5B_conn <- ggplot(df_summary_conn, aes(x = Annee, y = Surface_median, color = Scenario, linetype = Scenario)) +
       geom_line(linewidth = 1.2) +
+      scale_color_brewer(palette = "Dark2") +
       scale_y_continuous(limits = c(0, 100), labels = function(x) paste0(x, "%")) +
       labs(title = paste("Figure 5B: Median Surface Area - Connectivity", toupper(conn)), 
-           subtitle = freq, x = "Years", y = "Surface (%)", color = "Scenario:") +
+           subtitle = freq, x = "Years", y = "Surface (%)", color = "Scenario:", linetype = "Scenario:") +
       my_theme
     
     ggsave(filename = file.path(dossier_freq, paste0("Figure_5_Median_Connectivity_", conn, ".png")),
@@ -203,17 +203,12 @@ for (freq in toutes_frequences) {
   }
   
   # --------------------------------------------------------------------------
-  # PARTIE B : MODÈLES MIXTES & GRAPHIQUE DES TENDANCES (Figure A avec axe Y précis)
+  # PARTIE B : MODÈLES MIXTES & GRAPHIQUE DES TENDANCES
   # --------------------------------------------------------------------------
   df_final_freq <- df_freq %>% filter(Annee > 10)
   
   if (nrow(df_final_freq) > 0) {
     print(paste("Ajustement des modèles mixtes pour :", freq))
-    
-    # modele_mixte1 <- lmer(
-    #   Surface_Meta_pct ~ (Groupe_Num + Connectivite + Sous_Type) * Annee_scaled + (Annee_scaled | Sim_Unique),  
-    #   data = df_final_freq
-    # )
     
     modele_mixte2 <- lmer(
       Surface_Meta_pct ~ Scenario * Annee_scaled + (Annee_scaled | Sim_Unique),
@@ -226,7 +221,6 @@ for (freq in toutes_frequences) {
     tendances_scenarios <- emtrends(modele_mixte2, ~ Scenario, var = "Annee_scaled")
     df_pentes_clean <- as.data.frame(test(tendances_scenarios, null = 0))
     
-    # Extraction optionnelle de l'état final (si besoin pour un export futur)
     em_final_annee <- emmeans(modele_mixte2, ~ Scenario, at = list(Annee_scaled = 1))
     df_final_state <- as.data.frame(summary(em_final_annee)) %>%
       rename(Surface_Finale_Estimee = emmean, SE_Final = SE)
@@ -239,16 +233,17 @@ for (freq in toutes_frequences) {
         Connectivite = as.factor(str_extract(Scenario, "c[1-4]"))
       )
     
-    # Bornes automatiques pour l'axe Y précis (pas de 1)
     min_y <- floor(min(df_synthese_globale$Annee_scaled.trend - 1))
     max_y <- ceiling(max(df_synthese_globale$Annee_scaled.trend + 1))
     
+    # Graphique de tendances avec palette Dark2 (daltonien-friendly)
     p_trend <- ggplot(df_synthese_globale, aes(x = Connectivite, y = Annee_scaled.trend, color = Groupe_Num, shape = Sous_Type)) +
       geom_point(size = 3.5, position = position_dodge(width = 0.5)) +
       geom_errorbar(aes(ymin = Annee_scaled.trend - 1.96 * SE, 
                         ymax = Annee_scaled.trend + 1.96 * SE),
                     width = 0.2, position = position_dodge(width = 0.5)) +
-      scale_shape_manual(values = c(16, 17, 18, 8)) + # Étoile (shape 8) pour le 4e sous-type
+      scale_shape_manual(values = c(16, 17, 18, 8)) + 
+      scale_color_brewer(palette = "Dark2") + # Palette sécurisée daltoniens
       scale_y_continuous(
         breaks = seq(min_y, max_y, by = 1),
         minor_breaks = seq(min_y, max_y, by = 0.5)
@@ -268,7 +263,6 @@ for (freq in toutes_frequences) {
         panel.grid.minor = element_line(color = "grey92", linetype = "dotted")
       )
     
-    # Sauvegarde du graphique de tendance spécifique dans le dossier de la fréquence
     ggsave(filename = file.path(dossier_freq, "Graphique_Tendances_Seul.png"),
            plot = p_trend, width = 11, height = 8, dpi = 300, bg = "white")
     

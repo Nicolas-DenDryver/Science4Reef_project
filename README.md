@@ -71,10 +71,11 @@ Execution of the pipeline will genrate two main directories:
 1. **`Resultats_Globaux/`**
    * `Tableau_Global_Tous_Scenarios.csv`: Dataset containing time series across all stochastic runs and scenario grids.
 2. **`Resultats_Par_Frequence/`** (Organized into subfolders per disturbance frequency):
-   * **Figures 1A & 1B:** Temporal dynamics of metacommunity spatial coverage and total abundance.
-   * **Figure 2:** Genus-specific relative temporal dynamics of spatial coverage (*Acropora*, *Porites*, *Pocillopora*).
-   * **Figures 3–5:** Inter-run variance, spatial dispersion, and connectivity impacts.
-   * `Graphique_Tendances_Seul.png`: Estimated marginal trend slopes derived from linear mixed-effects modeling.
+   **Figures 1A & 1B:** Grid faceted time-series (rows 1-5, cols a-d) of abundance and total percent cover (mean $\pm$ 90% quantile ribbons).
+   **Figure 2:** Genus-specific percent cover dynamics (Acropora, Porites, Pocillopora) across scenarios.
+   **Figure 3:** Standard deviation of surface cover (inter-run dispersion).
+   **Figures 4 & 5:** Mean and median abundance/surface dynamics across connectivity levels.
+   **Graphique_Tendances_Seul.png:** Estimated slope coefficients derived from lmer models with 95% confidence intervals.
 
 ---
 

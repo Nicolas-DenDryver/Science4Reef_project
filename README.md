@@ -82,12 +82,15 @@ Execution of the pipeline will genrate two main directories:
 
 If you use this model or code in your research, please cite the associated article:
 
+### Formatted Citation
+> **Den Dryver, N.** (2026). Modelling spatial metapopulation dynamics of coral communities under thermal stress regimes. *Journal Name* [In Press / DOI].
+
+### BibTeX
 ```bibtex
-@article{coral_demographic_model_2026,
-  title={Modelling spatial metapopulation dynamics of coral communities under thermal stress regimes},
-  author={[Nicolas Den Dryver]},
-  journal={[Journal Name]},
-  year={2026},
-  url={[DOI/URL]}
+@article{dendryver2026coral,
+  author    = {Den Dryver, Nicolas},
+  title     = {Modelling spatial metapopulation dynamics of coral communities under thermal stress regimes},
+  journal   = {Journal Name},
+  year      = {2026},
+  doi       = {10.xxxx/xxxxxx}
 }
-```

@@ -8,7 +8,7 @@
 ## About
 This repository contains the source code for the scientific article entitled:  
 > *[Title of the upcoming article]*  
-> *[Nicolas Den Dryver]*
+> *[Nicolas Den Dryver, Julie Vercelloni and Serge Planes]*
 
 The model implements an **Integral Projection Model (IPM)** to simulate the spatiotemporal dynamics of a coral metacommunity (*Acropora*, *Porites*, *Pocillopora* genera) under varying disturbance frequencies (constant or progressive coral bleaching), integrating spatial connectivity and competition.
 
@@ -84,12 +84,12 @@ Execution of the pipeline will genrate two main directories:
 If you use this model or code in your research, please cite the associated article:
 
 ### Formatted Citation
-**Den Dryver, N.** (2026). Modelling spatial metapopulation dynamics of coral communities under thermal stress regimes. *Journal Name* [In Press / DOI].
+**Nicolas Den Dryver, Julie Vercelloni and Serge Planes** (2026). Modelling spatial metapopulation dynamics of coral communities under thermal stress regimes. *Journal Name* [In Press / DOI].
 
 ### BibTeX
 ```bibtex
 @article{dendryver2026coral,
-  author    = {Den Dryver, Nicolas},
+  author    = {Den Dryver, Nicolas}, {Julie Vercelloni} and {Serge Planes},
   title     = {Modelling spatial metapopulation dynamics of coral communities under thermal stress regimes},
   journal   = {Journal Name},
   year      = {2026},

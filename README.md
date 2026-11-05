@@ -30,6 +30,8 @@ The project is organized as follows:
 ├── Licence                         # GNU Affero General Public License v3.0
 └── README.md
 
+```
+
 ## Prerequisites and Installation 
 
 The project relies on R (v4.0 or higher). Required R packages can be installed using the following command:
@@ -45,7 +47,7 @@ install.packages(c("dplyr", "tidyr", "stringr", "ggplot2", "patchwork", "cowplot
 
 ## Usage Guide
 
-To reproduce the study's simulations and figures, execute the scripts sequentially:
+To reproduce the study's simulations and figures, execute the scripts as follow:
 
 ```R
 # 1. Load mathematical core functions

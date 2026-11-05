@@ -69,7 +69,7 @@ source("4_graphiques.R")
 
 Execution of the pipeline will genrate two main directories:
 1. **`Resultats_Globaux/`**
-   * `Tableau_Global_Tous_Scenarios.csv`: Dataset containing time series across all stochastic runs and scenario grids.
+   * **Tableau_Global_Tous_Scenarios.csv:** Dataset containing time series across all stochastic runs and scenario grids.
 2. **`Resultats_Par_Frequence/`** (Organized into subfolders per disturbance frequency):
    * **Figures 1A & 1B:** Grid faceted time-series (rows 1-5, cols a-d) of abundance and total percent cover (mean $\pm$ 90% quantile ribbons).
    * **Figure 2:** Genus-specific percent cover dynamics (Acropora, Porites, Pocillopora) across scenarios.

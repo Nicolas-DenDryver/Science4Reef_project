@@ -2,6 +2,7 @@
 
 > An Integral Projection Model (IPM) for coral metacommunities simulating coral community dynamics under varying bleaching frequencies.
 
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 [![Language: R](https://img.shields.io/badge/Language-R-blue.svg)](https://www.r-project.org/)
 
 ## 📖 About

@@ -69,9 +69,25 @@ source("4_graphiques.R")
 
 Execution of the pipeline will genrate two main directories:
 1. **`Resultats_Globaux/`**
-   * `Tableau_Global_Tous_Scenarios.csv`: Consolidated dataset containing time series across all stochastic runs and scenario grids.
+   * `Tableau_Global_Tous_Scenarios.csv`: Dataset containing time series across all stochastic runs and scenario grids.
 2. **`Resultats_Par_Frequence/`** (Organized into subfolders per disturbance frequency):
-   * **Figures 1A & 1B:** Temporal dynamics of spatial coverage and total population abundance.
+   * **Figures 1A & 1B:** Temporal dynamics of metacommunity spatial coverage and total abundance.
    * **Figure 2:** Genus-specific relative temporal dynamics of spatial coverage (*Acropora*, *Porites*, *Pocillopora*).
    * **Figures 3–5:** Inter-run variance, spatial dispersion, and connectivity impacts.
    * `Graphique_Tendances_Seul.png`: Estimated marginal trend slopes derived from linear mixed-effects modeling.
+
+---
+
+## Citation
+
+If you use this model or code in your research, please cite the associated article:
+
+```bibtex
+@article{coral_demographic_model_2026,
+  title={Modelling spatial metapopulation dynamics of coral communities under thermal stress regimes},
+  author={[Nicolas Den Dryver]},
+  journal={[Journal Name]},
+  year={2026},
+  url={[DOI/URL]}
+}
+```
